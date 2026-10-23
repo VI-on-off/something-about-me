@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0f">
+  <title>Veronika | Môj svet</title>
+
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --panel: #13131d;
+      --purple: #a855f7;
+      --pink: #ec4899;
+      --text: #f5f3ff;
+      --muted: #b5b1c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% 0%, #28113f 0%, transparent 48%),
+        var(--bg);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1050px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(10, 10, 15, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #292035;
+    }
+
+    nav {
+      min-height: 70px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      color: #d8b4fe;
+      font-weight: 900;
+      letter-spacing: 1px;
+      font-size: 1.15rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    nav a:hover {
+      color: #d8b4fe;
+    }
+
+    .hero {
+      min-height: 76vh;
+      display: flex;
+      align-items: center;
+      padding: 85px 0;
+      text-align: center;
+    }
+
+    .hero-content {
+      width: 100%;
+      animation: appear 1s ease both;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 14px;
+      border: 1px solid #8040ae;
+      background: #1c1029;
+      color: #e9d5ff;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 5.8rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -2px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, #c084fc, #f0abfc, #f9a8d4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 28px;
+      font-size: 1.1rem;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 23px;
+      border-radius: 12px;
+      color: white;
+      background: linear-gradient(120deg, #9333ea, #c026d3);
+      font-weight: 700;
+      box-shadow: 0 0 25px #9333ea35;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 32px #c026d355;
+    }
+
+    section {
+      padding: 75px 0;
+      scroll-margin-top: 75px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #171521, #101017);
+      border: 1px solid #30253e;
+      border-radius: 20px;
+      padding: 28px 23px;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--purple);
+    }
+
+    .emoji {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #e9d5ff;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .about-box {
+      max-width: 760px;
+      margin: auto;
+      text-align: center;
+      background: #13131d;
+      border: 1px solid #30253e;
+      padding: clamp(25px, 6vw, 45px);
+      border-radius: 24px;
+    }
+
+    .about-box p {
+      color: var(--muted);
+      margin-top: 15px;
+    }
+
+    .quote {
+      text-align: center;
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      font-weight: 700;
+      padding: 35px 0;
+    }
+
+    .quote span {
+      color: #d8b4fe;
+    }
+
+    .music-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      height: 48px;
+      margin: 25px auto;
+    }
+
+    .music-bar span {
+      width: 6px;
+      height: 18px;
+      border-radius: 10px;
+      background: linear-gradient(#c084fc, #ec4899);
+      animation: equalize 0.8s ease-in-out infinite alternate;
+    }
+
+    .music-bar span:nth-child(2n) {
+      animation-delay: 0.2s;
+    }
+
+    .music-bar span:nth-child(3n) {
+      animation-delay: 0.4s;
+    }
+
+    .music-bar span:nth-child(4n) {
+      animation-delay: 0.1s;
+    }
+
+    footer {
+      border-top: 1px solid #292035;
+      padding: 28px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .small {
+      color: #a78bfa;
+      font-size: 0.85rem;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes equalize {
+      from { height: 8px; }
+      to { height: 42px; }
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 15px 0;
+        flex-direction: column;
+      }
+
+      nav ul {
+        justify-content: center;
+        gap: 12px 18px;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        min-height: 65vh;
+        padding: 65px 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a href="#domov" class="logo">✦ VERONIKA.exe</a>
+      <ul>
+        <li><a href="#domov">Domov</a></li>
+        <li><a href="#omne">O mne</a></li>
+        <li><a href="#zaluby">Záľuby</a></li>
+        <li><a href="#motto">Moje motto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="domov">
+      <div class="container hero-content">
+        <span class="tag">✦ VITAJ V MOJOM SVETE ✦</span>
+        <h1>Ahoj, ja som<br>
+          <span class="gradient">Veronika!</span>
+        </h1>
+        <p>
+          Trochu hudby, trochu mágie, čierna estetika
+          a veľa škoricových slimákov. 🎻
+          Toto je môj malý kútik na internete.
+        </p>
+        <a class="button" href="#omne">Spoznaj ma ↓</a>
+
+        <div class="music-bar" aria-label="Animácia hudobných vĺn">
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+
+        <div class="small">LOADING MY UNIVERSE... 100%</div>
+      </div>
+    </section>
+
+    <section id="omne">
+      <div class="container">
+        <h2 class="section-title">Kto som? <span class="gradient">♡</span></h2>
+        <p class="section-subtitle">Malý pohľad do môjho sveta.</p>
+
+        <div class="about-box">
+          <span class="emoji">🌙</span>
+          <h3>Ahoj, som Veronika</h3>
+          <p>
+            Mám 13 rokov a rada objavujem svet cez hudbu.
+            Hrám na husle, rada počúvam hudbu a milujem
+            vôňu čerstvých škoricových slimákov.
+          </p>
+          <p>
+            Môj svet je plný melódií, snov a malých
+            radostí. Každý deň môže mať svoju vlastnú
+            pesničku! 💜
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="zaluby">
+      <div class="container">
+        <h2 class="section-title">Moje obľúbené veci</h2>
+        <p class="section-subtitle">
+          Tri malé veci, ktoré mi robia radosť.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <span class="emoji">🎻</span>
+            <h3>Husle</h3>
+            <p>
+              Rada hrám na husle a premieňam noty
+              na melódie. Hudba je spôsob, ako
+              vyjadriť to, čo niekedy nejde slovami.
+            </p>
+          </article>
+
+          <article class="card">
+            <span class="emoji">🎧</span>
+            <h3>Hudba</h3>
+            <p>
+              Hudba dokáže zmeniť náladu, rozjasniť
+              deň a vytvoriť atmosféru pre každý
+              okamih. Každá melódia má svoj príbeh.
+            </p>
+          </article>
+
+          <article class="card">
+            <span class="emoji">🥐</span>
+            <h3>Škoricové slimáky</h3>
+            <p>
+              Sladká dobrota, vôňa škorice a
+              pohodová chvíľka. Čo môže byť
+              lepšie ako čerstvý škoricový slimák?
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="motto">
+      <div class="container">
+        <div class="about-box">
+          <span class="emoji">💜</span>
+          <h2 class="section-title">Moje motto</h2>
+          <p class="quote">
+            „Život je krajší,<br>
+            keď má svoju <span>melódiu.</span>“
+          </p>
+          <p>
+            Buď sama sebou, nasleduj svoje sny
+            a nikdy neprestaň objavovať to,
+            čo ti robí radosť.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>🖤 Vytvorené s láskou pre Veroniku</p>
+      <p class="small">MY WORLD • MY MUSIC • MY RULES</p>
+      <p>© <span id="year"></span> Veronika Bošanská</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
